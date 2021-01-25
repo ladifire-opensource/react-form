@@ -7,8 +7,10 @@
 
 import * as React from 'react';
 
-import {CometComposerValidationErrorsContext} from './contexts';
-
-export function useComposerValidationErrors() {
-    return React.useContext(CometComposerValidationErrorsContext)
-}
+export const Checkbox = () => {
+    return (
+        <div>
+            Checkbox
+        </div>
+    );
+};

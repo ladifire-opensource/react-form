@@ -7,46 +7,75 @@
 
 import * as React from 'react';
 
-import {TextField} from './TextField';
 import {ReactForm} from '../../src';
+import {TextField} from './TextField';
+import {SubmitButton} from './SubmitButton';
+import {
+    DefaultExampleFormState,
+    DefaultFormData
+} from './types';
 
 interface Props {
     onSubmit?: (data: any) => void;
+    onBeforeViewStateChange?: (newState: any, oldState: any) => void;
 }
 
 export function DefaultForm(props: Props) {
     const {
         onSubmit,
+        onBeforeViewStateChange,
     } = props;
 
     const _initialFormData = React.useMemo(() => {
         return {
             data: {
-                name: '',
-                is_composer_capable: true,
-                is_messenger_capable: true,
-                can_download: true,
+                name: '123',
+                id: '',
             },
-        };
+        } as DefaultExampleFormState;
     }, []);
 
-    const handleSubmit = (data: any) => {
+    const handleSubmit = (data: DefaultExampleFormState) => {
         if (typeof onSubmit === 'function') {
             onSubmit(data);
         }
     };
 
+    const handleSubmitHalt = () => {
+        console.log('handleSubmitHalt');
+    };
+
+    const handleValidationErrors = (e) => {
+        console.log('handleValidationErrors', e);
+    };
+
+    const handleBeforeViewStateChange = (newState: DefaultExampleFormState, oldState: DefaultExampleFormState) => {
+        if (typeof onBeforeViewStateChange === 'function') {
+            onBeforeViewStateChange(newState, oldState);
+        }
+    };
+
+    const testValidators = {
+        name: (state: DefaultExampleFormState) => {
+            console.log('aaaaa', state);
+            return state.data.name.length > 10 ? 'Tên không được vượt quá 10 ký tự' : null;
+        },
+    };
+
     return (
-        <ReactForm
+        <ReactForm<DefaultFormData>
             beginningViewState={_initialFormData}
-            // onSubmitHalt
-            // validators
+            validators={testValidators}
             onSubmitCommit={handleSubmit}
+            onValidationErrors={handleValidationErrors}
+            onBeforeViewStateChange={handleBeforeViewStateChange}
+            onSubmitHalt={handleSubmitHalt}
         >
             {(onSubmit) => {
                 return (
                     <div>
                         <TextField/>
+                        <SubmitButton onClick={onSubmit}/>
                     </div>
                 )
             }}

@@ -9,18 +9,13 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
 
-import {DefaultForm} from './DefaultForm';
-
 storiesOf('React Form', module)
     .addParameters({providerSwitcher: {status: 'positive'}})
-    .add('default',
+    .add('initial data',
         () => {
             return (
                 <div>
-                    <DefaultForm
-                        onSubmit={action('onSubmit')}
-                        onBeforeViewStateChange={action('onBeforeViewStateChange')}
-                    />
+                    Initial data example
                 </div>
             );
         }

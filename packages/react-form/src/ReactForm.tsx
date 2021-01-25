@@ -27,8 +27,23 @@ import {getComposerPluginEligibility} from './getComposerPluginEligibility';
 import {getComposerUnsavedChangesAlert} from './getComposerUnsavedChangesAlert';
 import {getComposerValidationErrors} from './getComposerValidationErrors';
 import {reduceComposerViewState} from './reduceComposerViewState';
+import {
+    Validators,
+    BaseFormState,
+} from './types';
 
-function a(a, c) {
+interface Props<T> {
+    beginningViewState?: BaseFormState<T>;
+    validators?: Validators<T>;
+    children: ((onSubmit: (data: T) => void) => React.ReactElement) | React.ReactElement | string;
+    onSubmitCommit?: (state: BaseFormState<T>) => void;
+    onValidationErrors?: (errors: {
+        [key in keyof T]: string;
+    }) => void;
+    onBeforeViewStateChange?: (newState: BaseFormState<T>, oldState: BaseFormState<T>) => void;
+}
+
+function a<T extends object>(a: Props<T>, c) {
     var d = a.beginningViewState,
         e = a.children,
         f = a.eligibilityCheckers,
@@ -57,6 +72,9 @@ function a(a, c) {
         return c
     }, d, createEmptyCometComposerViewState);
     var x = d[0];
+
+    console.log("___x", x);
+
     d = d[1];
     var y = function() {
         if (!Boolean(x == null ? void 0 : x.ignoreDirtyFlag))
@@ -175,6 +193,6 @@ function a(a, c) {
         })
     })
 }
-let c = React.forwardRef(a);
+let c = React.forwardRef(a) as <T>(props: Props<T> & {ref?: React.RefObject<any>}) => React.ReactElement;
 export {c as ReactForm}
 

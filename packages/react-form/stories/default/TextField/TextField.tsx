@@ -16,6 +16,7 @@ import {
 } from '../../../src';
 import {textFieldReducer} from './textFieldReducer';
 import {textFieldStateChecker} from './textFieldStateChecker';
+import {DefaultExampleFormState} from '../types';
 
 const styles = stylex.create({
     root: {
@@ -60,9 +61,9 @@ export function _TextField(a: Props) {
     );
 }
 
-let c = withComposerViewStatePart(_TextField, function(a) {
+let c = withComposerViewStatePart(_TextField, function(state: DefaultExampleFormState) {
     return {
-        name: (a = a.data) == null ? "" : a.name
+        name: state.data ? state.data.name : '',
     }
 });
 

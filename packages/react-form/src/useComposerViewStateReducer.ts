@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {CometComposerViewStateAlteredContext} from './contexts/CometComposerViewStateAlteredContext';
-import {CometComposerViewStateReducersContext} from './contexts/CometComposerViewStateReducersContext';
+import {
+    CometComposerViewStateAlteredContext,
+    CometComposerViewStateReducersContext
+} from './contexts';
 import {useContextRef} from './utils/useContextRef';
 
 export function useComposerViewStateReducer(a, c?: any) {

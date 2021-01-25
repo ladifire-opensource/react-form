@@ -16,4 +16,6 @@ export * from './useComposerViewStateDispatcher';
 export * from './useComposerViewStateReducer';
 export * from './withComposerViewStatePart';
 export * from './useComposerValidationErrors';
+export * from './useCometComposerDecorator';
 export * from './contexts';
+export * from './types';

@@ -7,7 +7,7 @@
 
 import {withSomeContext} from './utils/withSomeContext';
 
-import {CometComposerViewStateContext} from './contexts/CometComposerViewStateContext';
+import {CometComposerViewStateContext} from './contexts';
 
 export function withComposerViewStatePart(a, c) {
     return withSomeContext(a, CometComposerViewStateContext, c)

@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type DefaultExampleFormState = {
-    data: {
-        id: string;
-        name: string;
-    };
-};
+import {BaseFormState} from '../../src';
+
+export interface DefaultFormData {
+    id: string;
+    name: string;
+}
+
+export interface DefaultExampleFormState extends BaseFormState<DefaultFormData> {};
