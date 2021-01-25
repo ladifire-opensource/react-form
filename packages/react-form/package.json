@@ -1,0 +1,21 @@
+{
+  "name": "@ladifire-opensource/react-form",
+  "version": "0.0.1-beta.1",
+  "description": "React form wrapper",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "source": "src/index.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ladifire-opensource/react-form"
+  }
+}
