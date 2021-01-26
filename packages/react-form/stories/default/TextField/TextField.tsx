@@ -49,7 +49,7 @@ export function _TextField(a: Props) {
     return (
         <div className={stylex(styles.root)}>
             <label>
-                Full name:
+                Site name:
                 <input
                     autoComplete="off"
                     disabled={a}

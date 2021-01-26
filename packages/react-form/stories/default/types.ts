@@ -12,6 +12,7 @@ export interface DefaultFormData {
     checked?: boolean;
     radio: string;
     select: string;
+    range: number;
 }
 
 export interface DefaultExampleFormState extends BaseFormState<DefaultFormData> {};

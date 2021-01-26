@@ -50,14 +50,21 @@ export const _RadioGroup = (props: Props) => {
 
     return (
         <div>
-            <label>
-                <input type="radio" value="OPTION1" checked={radio === "OPTION1"} onChange={handleChange}/>
-                Option 1
-            </label>
-            <label>
-                <input type="radio" value="OPTION2" checked={radio === "OPTION2"} onChange={handleChange}/>
-                Option 2
-            </label>
+            <label>Select site programing language:</label>
+            <div>
+                <label>
+                    <input type="radio" value="react" checked={radio === "react"} onChange={handleChange}/>
+                    React
+                </label>
+                <label>
+                    <input type="radio" value="vue" checked={radio === "vue"} onChange={handleChange}/>
+                    Vue
+                </label>
+                <label>
+                    <input type="radio" value="angular" checked={radio === "angular"} onChange={handleChange}/>
+                    Angular
+                </label>
+            </div>
         </div>
     );
 };

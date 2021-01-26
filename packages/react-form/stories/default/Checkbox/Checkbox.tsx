@@ -53,7 +53,7 @@ export const _Checkbox = (props: Props) => {
         <div>
             <label>
                 <input type="checkbox" checked={checked} onChange={handleChange}/>
-                Something else
+                Use secure connection (https)
             </label>
         </div>
     );

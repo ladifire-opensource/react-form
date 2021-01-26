@@ -40,12 +40,12 @@ export const _Select = (props: Props) => {
 
     return (
         <div>
-            <label>Select field</label>
+            <label>Select site language:</label>
             <select value={select} onChange={handleChange}>
-                <option selected={select === 'grapefruit'} value="grapefruit">Grapefruit</option>
-                <option selected={select === 'lime'} value="lime">Lime</option>
-                <option selected={select === 'coconut'} value="coconut">Coconut</option>
-                <option selected={select === 'mango'} value="mango">Mango</option>
+                <option selected={select === 'en'} value="en">English</option>
+                <option selected={select === 'vi'} value="vi">Vietnamese</option>
+                <option selected={select === 'zh'} value="zh">Traditional Chinese</option>
+                <option selected={select === 'fr'} value="fr">French</option>
             </select>
         </div>
     );
