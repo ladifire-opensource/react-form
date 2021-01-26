@@ -9,10 +9,12 @@ import * as React from 'react';
 
 import stylex from '@ladifire-opensource/stylex';
 
+import {FormField} from '../../components';
 import {
     useFormViewStateDispatcher,
     useFormViewStateReducer,
     withFormViewStatePart,
+    useFormValidationErrors,
 } from '../../../';
 import {textFieldReducer} from './textFieldReducer';
 import {textFieldStateChecker} from './textFieldStateChecker';
@@ -25,6 +27,11 @@ const styles = stylex.create({
         marginRight: 'auto',
         marginTop: 16,
     },
+    error: {
+        fontSize: '0.875rem',
+        color: 'red',
+        marginTop: 6
+    },
 });
 
 interface Props {
@@ -32,31 +39,51 @@ interface Props {
     isDisabled?: boolean;
 }
 
-export function _TextField(a: Props) {
-    var c = a.name;
-    a = a.isDisabled;
-    a = a === void 0 ? !1 : a;
+export function _TextField(props: Props) {
+    const {
+        name,
+        isDisabled,
+    } = props;
+
     useFormViewStateReducer(textFieldReducer, textFieldStateChecker);
-    const d = useFormViewStateDispatcher<DefaultFormData>();
+
+    const errors = useFormValidationErrors();
+    const formDispatch = useFormViewStateDispatcher<DefaultFormData>();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
-            const payload = {
-                name: event.target.value,
-                type: "update_name"
-            };
-            d(payload)
-        }, [d]);
+        const payload = {
+            name: event.target.value,
+            type: "update_name"
+        };
+
+        formDispatch(payload);
+    }, [formDispatch]);
 
     return (
         <div className={stylex(styles.root)}>
-            <label>
-                Site name:
+            <FormField label="Site url:">
                 <input
+                    className={stylex.dedupe(
+                        {
+                            position: 'relative',
+                        },
+                        errors && errors['name'] ? {
+                            borderColor: 'red',
+                            color: 'red'
+                        } : null,
+                    )}
                     autoComplete="off"
-                    disabled={a}
-                    value={(a = c) != null ? a : ""}
+                    disabled={isDisabled}
+                    value={name}
                     onChange={handleChange}
                 />
-            </label>
+                {
+                    errors && errors['name'] && (
+                        <span className={stylex(styles.error)}>
+                            {errors['name']}
+                        </span>
+                    )
+                }
+            </FormField>
         </div>
     );
 }

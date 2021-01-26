@@ -7,13 +7,51 @@
 
 import * as React from 'react';
 
-export const File = () => {
+import {
+    useFormViewStateDispatcher,
+    useFormViewStateReducer,
+    withFormViewStatePart,
+} from '../../../';
+
+import {fileReducer} from './fileReducer';
+import {FormField} from '../../components';
+import {DefaultExampleFormState} from '../types';
+
+interface Props {
+    file?: boolean;
+    isDisabled?: boolean;
+}
+
+export const _File = (props: Props) => {
+    const {
+        file,
+        isDisabled,
+    } = props;
+
+    useFormViewStateReducer(fileReducer);
+    const formDispatch = useFormViewStateDispatcher();
+    const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
+        const _files = Array.from(event.target.files);
+        console.log('_files_files_files', _files);
+
+        const payload = {
+            file: _files ? _files[0] : undefined,
+            type: "update_file"
+        };
+        formDispatch(payload)
+    }, [formDispatch]);
+
     return (
-        <div>
-            <label>
-                Select files:
-            </label>
-            <input type="file"/>
-        </div>
+        <FormField label="Select file:" layout="horizontal">
+            <input type="file" onChange={handleChange}/>
+        </FormField>
     );
 };
+
+let c = withFormViewStatePart(_File, function(state: DefaultExampleFormState) {
+    return {
+        file: state.data ? state.data.file : undefined,
+    }
+});
+
+export {c as File}

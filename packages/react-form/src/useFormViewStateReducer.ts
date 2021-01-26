@@ -11,10 +11,13 @@ import {
 } from './contexts';
 import {useContextRef} from './utils/useContextRef';
 
-export function useFormViewStateReducer(a, c?: any) {
-    const d = function(a, b) {
-        return !1
+export function useFormViewStateReducer(reducer, stateChecker?: any) {
+    const defaultStateChecker = function(newState, oldState) {
+        // default return false, that's mean newState is oldState is Equals
+        return false;
     };
-    useContextRef((c = c) != null ? c : d, CometFormViewStateAlteredContext);
-    return useContextRef(a, CometFormViewStateReducersContext)
+
+    useContextRef(stateChecker || defaultStateChecker, CometFormViewStateAlteredContext);
+
+    return useContextRef(reducer, CometFormViewStateReducersContext)
 }

@@ -7,8 +7,6 @@
 
 import * as React from 'react';
 
-import stylex from '@ladifire-opensource/stylex';
-
 import {
     useFormViewStateDispatcher,
     useFormViewStateReducer,
@@ -16,15 +14,16 @@ import {
 } from '../../../';
 import {selectReducer} from './selectReducer';
 import {DefaultExampleFormState, DefaultFormData} from "../types";
+import {FormField} from '../../components';
 
 interface Props {
-    select?: string;
+    language?: string;
     isDisabled?: boolean;
 }
 
 export const _Select = (props: Props) => {
     const {
-        select,
+        language,
         isDisabled,
     } = props;
 
@@ -32,28 +31,27 @@ export const _Select = (props: Props) => {
     const formDispatch = useFormViewStateDispatcher<DefaultFormData>();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLSelectElement>) {
         const payload = {
-            select: event.target.value,
-            type: "update_select",
+            language: event.target.value,
+            type: "update_language",
         };
         formDispatch(payload)
     }, [formDispatch]);
 
     return (
-        <div>
-            <label>Select site language:</label>
-            <select value={select} onChange={handleChange}>
-                <option selected={select === 'en'} value="en">English</option>
-                <option selected={select === 'vi'} value="vi">Vietnamese</option>
-                <option selected={select === 'zh'} value="zh">Traditional Chinese</option>
-                <option selected={select === 'fr'} value="fr">French</option>
+        <FormField label="Select site language:" layout="horizontal">
+            <select value={language} onChange={handleChange}>
+                <option selected={language === 'en'} value="en">English</option>
+                <option selected={language === 'vi'} value="vi">Vietnamese</option>
+                <option selected={language === 'zh'} value="zh">Traditional Chinese</option>
+                <option selected={language === 'fr'} value="fr">French</option>
             </select>
-        </div>
+        </FormField>
     );
 };
 
 let c = withFormViewStatePart(_Select, function(state: DefaultExampleFormState) {
     return {
-        select: state.data ? state.data.select : false,
+        language: state.data ? state.data.language : false,
     }
 });
 

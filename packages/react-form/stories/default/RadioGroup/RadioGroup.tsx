@@ -25,16 +25,20 @@ const styles = stylex.create({
         marginRight: 'auto',
         marginTop: 16,
     },
+    options: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
 });
 
 interface Props {
-    radio?: string;
+    programing_language?: string;
     isDisabled?: boolean;
 }
 
 export const _RadioGroup = (props: Props) => {
     const {
-        radio,
+        programing_language,
         isDisabled,
     } = props;
 
@@ -42,8 +46,8 @@ export const _RadioGroup = (props: Props) => {
     const formDispatch = useFormViewStateDispatcher<DefaultFormData>();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
         const payload = {
-            radio: event.target.value,
-            type: "update_radio"
+            programing_language: event.target.value,
+            type: "update_programing_language"
         };
         formDispatch(payload)
     }, [formDispatch]);
@@ -51,17 +55,17 @@ export const _RadioGroup = (props: Props) => {
     return (
         <div>
             <label>Select site programing language:</label>
-            <div>
+            <div className={stylex(styles.options)}>
                 <label>
-                    <input type="radio" value="react" checked={radio === "react"} onChange={handleChange}/>
+                    <input type="radio" value="react" checked={programing_language === "react"} onChange={handleChange}/>
                     React
                 </label>
                 <label>
-                    <input type="radio" value="vue" checked={radio === "vue"} onChange={handleChange}/>
+                    <input type="radio" value="vue" checked={programing_language === "vue"} onChange={handleChange}/>
                     Vue
                 </label>
                 <label>
-                    <input type="radio" value="angular" checked={radio === "angular"} onChange={handleChange}/>
+                    <input type="radio" value="angular" checked={programing_language === "angular"} onChange={handleChange}/>
                     Angular
                 </label>
             </div>
@@ -71,7 +75,7 @@ export const _RadioGroup = (props: Props) => {
 
 let c = withFormViewStatePart(_RadioGroup, function(state: DefaultExampleFormState) {
     return {
-        radio: state.data ? state.data.radio : false,
+        programing_language: state.data ? state.data.programing_language : false,
     }
 });
 

@@ -9,6 +9,14 @@ import * as React from 'react';
 
 import {CometFormViewStateDispatcherContext} from './contexts';
 
+/**
+ * Context data type
+ * e.g:
+ * {
+ *     type: "action_type",
+ *     name: "abc"
+ * }
+ * */
 type ContextData<T extends object> = {
     type: string; // TODO: how to pass type of dispatch
 } & {

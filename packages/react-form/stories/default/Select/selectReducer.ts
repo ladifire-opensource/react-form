@@ -9,10 +9,10 @@ import {DefaultExampleFormState} from '../types';
 
 export function selectReducer(state: DefaultExampleFormState, action: any) {
     switch (action.type) {
-        case "update_select":
+        case "update_language":
             return Object.assign({}, state, {
                 data: Object.assign({}, state.data, {
-                    select: action.select
+                    language: action.language
                 })
             })
     }

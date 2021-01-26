@@ -7,8 +7,11 @@
 
 import * as React from 'react';
 
+import stylex from '@ladifire-opensource/stylex';
+
 import {ReactForm} from '../../';
 import {TextField} from './TextField';
+import {TextArea} from './TextArea';
 import {Checkbox} from './Checkbox';
 import {RadioGroup} from './RadioGroup';
 import {Select} from './Select';
@@ -19,7 +22,21 @@ import {
     DefaultExampleFormState,
     DefaultFormData
 } from './types';
-import {FormRow} from '../components';
+import {FormRow, Card} from '../components';
+
+const styles = stylex.create({
+    wrapper: {
+        display: 'flex',
+    },
+    form: {
+        padding: 16,
+    },
+    json: {
+        padding: 16,
+        marginLeft: 16,
+        backgroundColor: '#f2f2f2'
+    },
+});
 
 interface Props {
     onSubmit?: (data: any) => void;
@@ -35,10 +52,11 @@ export function DefaultForm(props: Props) {
     const _initialFormData = React.useMemo(() => {
         return {
             data: {
-                name: '123',
-                checked: false,
-                radio: 'react',
-                select: 'en',
+                name: '',
+                description: '',
+                secure: false,
+                programing_language: 'react',
+                language: 'en',
                 range: 20,
             },
         } as DefaultExampleFormState;
@@ -72,53 +90,63 @@ export function DefaultForm(props: Props) {
 
     const testValidators = {
         name: (state: DefaultExampleFormState) => {
-            console.log('aaaaa', state);
-            return state.data.name.length > 10 ? 'Tên không được vượt quá 10 ký tự' : null;
+            const _demoUrlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+            if (!state.data.name || !state.data.name.length) {
+                return 'site url is required'
+            }
+            return _demoUrlRegex.test(state.data.name) ? null : 'Wrong site url';
         },
     };
 
     return (
-        <ReactForm<DefaultFormData>
-            beginningViewState={_initialFormData}
-            validators={testValidators}
-            onSubmitCommit={handleSubmit}
-            onValidationErrors={handleValidationErrors}
-            onBeforeViewStateChange={handleBeforeViewStateChange}
-            onSubmitHalt={handleSubmitHalt}
-        >
-            {(onSubmit) => {
-                return (
-                    <div>
-                        <h1>Create your website</h1>
-                        <div>
-                            <FormRow>
-                                <TextField/>
-                            </FormRow>
-                            <FormRow>
-                                <Checkbox/>
-                            </FormRow>
-                            <FormRow>
-                                <RadioGroup/>
-                            </FormRow>
-                            <FormRow>
-                                <Select/>
-                            </FormRow>
-                            <FormRow>
-                                <Range/>
-                            </FormRow>
-                            <FormRow>
-                                <File/>
-                            </FormRow>
-                            <FormRow>
-                                <SubmitButton onClick={onSubmit}/>
-                            </FormRow>
-                        </div>
-                        <div>
-                            <pre>{JSON.stringify(formData, null, 2) }</pre>
-                        </div>
-                    </div>
-                )
-            }}
-        </ReactForm>
+        <div className={stylex(styles.wrapper)}>
+            <Card xstyle={styles.form}>
+                <ReactForm<DefaultFormData>
+                    beginningViewState={_initialFormData}
+                    validators={testValidators}
+                    onSubmitCommit={handleSubmit}
+                    onValidationErrors={handleValidationErrors}
+                    onBeforeViewStateChange={handleBeforeViewStateChange}
+                    onSubmitHalt={handleSubmitHalt}
+                >
+                    {(onSubmit) => {
+                        return (
+                            <div>
+                                <h1>Create your website</h1>
+                                <div>
+                                    <FormRow>
+                                        <TextField/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <TextArea/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <Checkbox/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <RadioGroup/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <Select/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <Range/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <File/>
+                                    </FormRow>
+                                    <FormRow>
+                                        <SubmitButton onClick={onSubmit}/>
+                                    </FormRow>
+                                </div>
+                            </div>
+                        )
+                    }}
+                </ReactForm>
+            </Card>
+            <Card xstyle={styles.json}>
+                <pre>{JSON.stringify(formData, null, 2) }</pre>
+            </Card>
+        </div>
     );
 }

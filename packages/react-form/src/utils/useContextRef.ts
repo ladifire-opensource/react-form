@@ -7,17 +7,18 @@
 
 import * as React from 'react';
 
-export function useContextRef(a, b) {
-    b = React.useContext(b);
-    var c = b.current;
+export function useContextRef(reducer, context) {
+    let b = React.useContext<any>(context);
+    const currentValue = b.current;
+
     React.useEffect(function () {
-        if (c.has(a)) {
-            var b = c.get(a);
-            c.set(a, b + 1)
-        } else c.set(a, 1);
+        if (currentValue.has(reducer)) {
+            let b = currentValue.get(reducer);
+            currentValue.set(reducer, b + 1);
+        } else currentValue.set(reducer, 1);
         return function () {
-            var b = c.get(a);
-            b !== void 0 && (b === 1 ? c["delete"](a) : c.set(a, b - 1))
+            let b = currentValue.get(reducer);
+            b !== void 0 && (b === 1 ? currentValue["delete"](reducer) : currentValue.set(reducer, b - 1))
         }
-    }, [c, a])
+    }, [currentValue, reducer])
 }

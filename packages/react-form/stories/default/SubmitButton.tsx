@@ -7,7 +7,11 @@
 
 import * as React from 'react';
 
-import {withFormViewStatePart} from '../../';
+import {
+    withFormViewStatePart,
+    useFormValidationErrors,
+    isEmpty,
+} from '../../';
 
 interface Props {
     isDirty?: boolean;
@@ -18,8 +22,11 @@ const _SubmitButton = (props: Props) => {
         isDirty,
     } = props;
 
+    const errors = useFormValidationErrors();
+    const shouldDisableSubmit = !isDirty || !isEmpty(errors);
+
     return (
-        <button type="submit" disabled={!isDirty}>Submit</button>
+        <button type="submit" disabled={shouldDisableSubmit}>Submit</button>
     );
 };
 

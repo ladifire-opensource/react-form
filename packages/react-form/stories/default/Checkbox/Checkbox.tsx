@@ -15,27 +15,19 @@ import {
     withFormViewStatePart,
 } from '../../../';
 
+import {FormField} from '../../components';
 import {checkboxReducer} from './checkboxReducer';
 import {checkboxStateChecker} from './checkboxStateChecker';
 import {DefaultExampleFormState} from '../types';
 
-const styles = stylex.create({
-    root: {
-        maxWidth: 500,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginTop: 16,
-    },
-});
-
 interface Props {
-    checked?: boolean;
+    secure?: boolean;
     isDisabled?: boolean;
 }
 
 export const _Checkbox = (props: Props) => {
     const {
-        checked,
+        secure,
         isDisabled,
     } = props;
 
@@ -43,25 +35,25 @@ export const _Checkbox = (props: Props) => {
     const formDispatch = useFormViewStateDispatcher();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
         const payload = {
-            checked: event.target.checked,
-            type: "update_checked"
+            secure: event.target.checked,
+            type: "update_secure"
         };
         formDispatch(payload)
     }, [formDispatch]);
 
     return (
-        <div>
-            <label>
-                <input type="checkbox" checked={checked} onChange={handleChange}/>
+        <FormField label="Secured:">
+            <span>
+                <input type="checkbox" checked={secure} onChange={handleChange}/>
                 Use secure connection (https)
-            </label>
-        </div>
+            </span>
+        </FormField>
     );
 };
 
 let c = withFormViewStatePart(_Checkbox, function(state: DefaultExampleFormState) {
     return {
-        checked: state.data ? state.data.checked : false,
+        secure: state.data ? state.data.secure : false,
     }
 });
 

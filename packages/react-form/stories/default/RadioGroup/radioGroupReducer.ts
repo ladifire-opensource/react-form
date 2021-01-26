@@ -9,10 +9,10 @@ import {DefaultExampleFormState} from '../types';
 
 export function radioGroupReducer(state: DefaultExampleFormState, action: any) {
     switch (action.type) {
-        case "update_radio":
+        case "update_programing_language":
             return Object.assign({}, state, {
                 data: Object.assign({}, state.data, {
-                    radio: action.radio
+                    programing_language: action.programing_language
                 })
             })
     }

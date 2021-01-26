@@ -14,6 +14,7 @@ import {
 } from '../../../';
 import {rangeReducer} from './rangeReducer';
 import {DefaultExampleFormState, DefaultFormData} from "../types";
+import {FormField} from '../../components';
 
 interface Props {
     range: number;
@@ -37,12 +38,9 @@ export const _Range = (props: Props) => {
     }, [formDispatch]);
 
     return (
-        <div>
-            <label>
-                Range type:
-            </label>
+        <FormField label="Range type:" layout="horizontal">
             <input type="range" value={range} onChange={handleChange}/>
-        </div>
+        </FormField>
     );
 };
 

@@ -7,12 +7,12 @@
 
 import {DefaultExampleFormState} from '../types';
 
-export function checkboxReducer(state: DefaultExampleFormState, action: any) {
+export function fileReducer(state: DefaultExampleFormState, action: any) {
     switch (action.type) {
-        case "update_secure":
+        case "update_file":
             return Object.assign({}, state, {
                 data: Object.assign({}, state.data, {
-                    secure: action.secure
+                    file: action.file
                 })
             })
     }

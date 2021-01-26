@@ -178,7 +178,7 @@ function a<T extends object>(a: Props<T>, c) {
                                                         },
                                                         type: "submit"
                                                     })]
-                                                }), n ? React.createElement(/*TODO: b("CometOnBeforeUnload.react")*/"div", {
+                                                }), n ? React.createElement(/*TODO: b("CometOnBeforeUnload")*/"div", {
                                                     onBeforeUnload: y
                                                 }) : null]
                                             })

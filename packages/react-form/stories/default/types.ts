@@ -9,10 +9,12 @@ import {BaseFormState} from '../../src';
 
 export interface DefaultFormData {
     name: string;
-    checked?: boolean;
-    radio: string;
-    select: string;
+    description?: string;
+    secure?: boolean;
+    programing_language: string;
+    language: string;
     range: number;
+    file?: File;
 }
 
-export interface DefaultExampleFormState extends BaseFormState<DefaultFormData> {};
+export interface DefaultExampleFormState extends BaseFormState<DefaultFormData> {}
