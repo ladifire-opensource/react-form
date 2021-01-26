@@ -37,6 +37,7 @@ interface Props {
 }
 
 export const _RadioGroup = (props: Props) => {
+    console.log("__render _RadioGroup");
     const {
         programing_language,
         isDisabled,

@@ -22,6 +22,7 @@ interface Props {
 }
 
 export const _Range = (props: Props) => {
+    console.log("__render _Range");
     const {
       range,
       isDisabled,

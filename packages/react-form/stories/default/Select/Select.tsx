@@ -22,6 +22,7 @@ interface Props {
 }
 
 export const _Select = (props: Props) => {
+    console.log("__render _Select");
     const {
         language,
         isDisabled,

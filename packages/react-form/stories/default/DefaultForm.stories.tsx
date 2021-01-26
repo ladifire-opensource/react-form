@@ -15,10 +15,19 @@ storiesOf('React Form', module)
     .addParameters({providerSwitcher: {status: 'positive'}})
     .add('default',
         () => {
+        const handleSubmit = () => {
+            const _timeout = setTimeout(() => {
+                return new Promise((resolve, reject) => {
+                    resolve('error');
+                })
+            }, 2500);
+        };
             return (
                 <div>
                     <DefaultForm
-                        onSubmit={action('onSubmit')}
+                        onSubmitStart={action('onSubmitStart')}
+                        onSubmitCommit={handleSubmit}
+                        onSubmitHalt={action('onSubmitHalt')}
                         onBeforeViewStateChange={action('onBeforeViewStateChange')}
                     />
                 </div>

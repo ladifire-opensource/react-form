@@ -35,51 +35,57 @@ import {
 interface Props<T> {
     beginningViewState?: BaseFormState<T>;
     validators?: Validators<T>;
-    children: ((onSubmit: (data: T) => void) => React.ReactElement) | React.ReactElement | string;
+    children: ((onSubmit: (data: T) => void) => React.ReactElement);
     onSubmitCommit?: (state: BaseFormState<T>) => void;
     onValidationErrors?: (errors: {
         [key in keyof T]: string;
     }) => void;
     onBeforeViewStateChange?: (newState: BaseFormState<T>, oldState: BaseFormState<T>) => void;
+    onSubmitStart?: () => void;
+    onSubmitHalt?: () => void;
 }
 
-function a<T extends object>(a: Props<T>, c) {
-    var d = a.beginningViewState,
-        e = a.children,
-        f = a.eligibilityCheckers,
-        h = a.loggers,
-        i = a.onBeforeViewStateChange,
-        j = a.onSubmitCommit,
-        k = a.onSubmitHalt,
-        l = a.onSubmitStart,
-        m = a.onValidationErrors,
-        n = a.registerOnBeforeUnload;
-    n = n === void 0 ? !0 : n;
-    var o = a.target,
-        p = a.unalteredBeginningViewState,
-        q = a.validators,
-        r = React.useRef(new Map()),
+function _Reactform<T extends object>(a: Props<T>, c) {
+    let {
+        beginningViewState,
+        children,
+        eligibilityCheckers,
+        loggers,
+        onBeforeViewStateChange,
+        onSubmitCommit,
+        onSubmitHalt,
+        onSubmitStart,
+        onValidationErrors,
+        registerOnBeforeUnload = true,
+        target,
+        unalteredBeginningViewState,
+        validators,
+    } = a;
+
+    var r = React.useRef(new Map()),
         s = React.useRef(new Map()),
         t = React.useRef({}),
         u = React.useRef(new Set()),
         v = React.useRef(new Map()),
         w = React.useRef(null);
-    a = React.useRef(null);
-    d = React.useReducer(function(a, c) {
-        c = reduceFormViewState(r, s, a, p, c);
+
+    const formRef = React.useRef(null);
+
+    let d = React.useReducer(function(a, c) {
+        c = reduceFormViewState(r, s, a, unalteredBeginningViewState, c);
         w.current = c;
-        i && i(c, a);
+        onBeforeViewStateChange && onBeforeViewStateChange(c, a);
         return c
-    }, d, createEmptyCometFormViewState);
+    }, beginningViewState, createEmptyCometFormViewState);
+
     var x = d[0];
-
-    console.log("___x", x);
-
     d = d[1];
+
     var y = function() {
         if (!Boolean(x == null ? void 0 : x.ignoreDirtyFlag))
             return getFormUnsavedChangesAlert(x == null ? void 0 : x.isDirty)
     };
+
     React.useImperativeHandle(c, function() {
         return {
             getViewState: function() {
@@ -87,31 +93,37 @@ function a<T extends object>(a: Props<T>, c) {
             }
         }
     }, [x]);
+
     c = React.useReducer(cometFormPluginsReducers, {
         decorators: new Map(),
         handlers: new Map()
     });
     var z = c[0];
     c = c[1];
+
     var A = React.useMemo(function() {
-        return q != null ? getFormValidationErrors(q, x) : {}
-    }, [q, x]);
+        return validators != null ? getFormValidationErrors(validators, x) : {}
+    }, [validators, x]);
+
     shallowEqual(t.current, A) || (t.current = A);
+
     A = React.useMemo(function() {
-        return f != null ? getFormPluginEligibility(f, x) : new Set()
-    }, [f, x]);
+        return eligibilityCheckers != null ? getFormPluginEligibility(eligibilityCheckers, x) : new Set()
+    }, [eligibilityCheckers, x]);
+
     u.current.size === A.size && Array.from(A).every(function(a) {
         return u.current.has(a)
     }) || (u.current = A);
-    var B = React.useCallback(function(a) {
+
+    const handleSubmit = React.useCallback(function(a) {
             a != null && a.type !== "press" && a.preventDefault();
             if (Object.keys(t.current).length > 0) {
-                m && m(t.current);
+                onValidationErrors && onValidationErrors(t.current);
                 return
             }
             var c = w.current;
             if (c == null) return;
-            l && l();
+            onSubmitStart && onSubmitStart();
             a = v.current;
             if (a) {
                 a = Array.from(a.keys()).reduce(function(a, d) {
@@ -125,23 +137,24 @@ function a<T extends object>(a: Props<T>, c) {
                     })
                 }, Promise.resolve());
                 a.then(function() {
-                    j(c)
+                    onSubmitCommit(c)
                 })["catch"](function() {
-                    k && k()
+                    onSubmitHalt && onSubmitHalt()
                 })
-            } else j(c)
-        }, [j, k, l, m]),
+            } else onSubmitCommit(c)
+        }, [onSubmitCommit, onSubmitHalt, onSubmitStart, onValidationErrors]),
         C = x.creationSessionID;
+
     A = React.useMemo(function() {
         return function(a) {
             var c;
-            C == null ? console.error("creationSessionID should be defined in composer of type " + String(o == null ? void 0 : o.type)) : ((c = h) != null ? c : []).map(function(b) {
+            C == null ? console.error("creationSessionID should be defined in composer of type " + String(target == null ? void 0 : target.type)) : ((c = loggers) != null ? c : []).map(function(b) {
                 return b(a, C, {
-                    target: o
+                    target: target
                 })
             })
         }
-    }, [C, o, h]);
+    }, [C, target, loggers]);
 
     return React.createElement(CometFormPluginsDispatchContext.Provider, {
         value: c,
@@ -164,21 +177,21 @@ function a<T extends object>(a: Props<T>, c) {
                                         children: React.createElement(CometFormPreSubmitHooksContext.Provider, {
                                             value: v,
                                             children: React.createElement(CometFormRefContext.Provider, {
-                                                value: a,
+                                                value: formRef,
                                                 children: [React.createElement("form", {
                                                     "data-testid": void 0,
                                                     method: "POST",
-                                                    onSubmit: B,
-                                                    ref: a,
+                                                    onSubmit: handleSubmit,
+                                                    ref: formRef,
                                                     children: [React.useMemo(function() {
-                                                        return e(B)
-                                                    }, [e, B]), React.createElement("input", {
+                                                        return children(handleSubmit)
+                                                    }, [children, handleSubmit]), React.createElement("input", {
                                                         style: {
                                                             display: "none"
                                                         },
                                                         type: "submit"
                                                     })]
-                                                }), n ? React.createElement(/*TODO: b("CometOnBeforeUnload")*/"div", {
+                                                }), registerOnBeforeUnload ? React.createElement(/*TODO: b("CometOnBeforeUnload")*/"div", {
                                                     onBeforeUnload: y
                                                 }) : null]
                                             })
@@ -193,6 +206,7 @@ function a<T extends object>(a: Props<T>, c) {
         })
     })
 }
-let c = React.forwardRef(a) as <T>(props: Props<T> & {ref?: React.RefObject<any>}) => React.ReactElement;
+
+let c = React.forwardRef(_Reactform) as <T>(props: Props<T> & {ref?: React.RefObject<any>}) => React.ReactElement;
 export {c as ReactForm}
 

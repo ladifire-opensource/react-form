@@ -39,13 +39,17 @@ const styles = stylex.create({
 });
 
 interface Props {
-    onSubmit?: (data: any) => void;
+    onSubmitCommit?: (data: any) => void;
+    onSubmitStart?: () => void;
+    onSubmitHalt?: () => void;
     onBeforeViewStateChange?: (newState: any, oldState: any) => void;
 }
 
 export function DefaultForm(props: Props) {
     const {
-        onSubmit,
+        onSubmitStart,
+        onSubmitCommit,
+        onSubmitHalt,
         onBeforeViewStateChange,
     } = props;
 
@@ -67,14 +71,10 @@ export function DefaultForm(props: Props) {
     const [submitting, setSubmitting] = React.useState(false);
 
     const handleSubmit = React.useCallback((data: DefaultExampleFormState) => {
-        if (typeof onSubmit === 'function') {
-            onSubmit(data);
+        if (typeof onSubmitCommit === 'function') {
+            onSubmitCommit(data);
         }
     }, [submitting]);
-
-    const handleSubmitHalt = () => {
-        console.log('handleSubmitHalt');
-    };
 
     const handleValidationErrors = React.useCallback((e) => {
         setSubmitting(false);
@@ -86,6 +86,18 @@ export function DefaultForm(props: Props) {
         }
 
         setFormData(newState);
+    };
+
+    const handleSubmitStart = () => {
+        if (typeof onSubmitStart === 'function') {
+            onSubmitStart();
+        }
+    };
+
+    const handleSubmitHalt = () => {
+        if (typeof onSubmitHalt === 'function') {
+            onSubmitHalt();
+        }
     };
 
     const testValidators = {
@@ -107,6 +119,7 @@ export function DefaultForm(props: Props) {
                     onSubmitCommit={handleSubmit}
                     onValidationErrors={handleValidationErrors}
                     onBeforeViewStateChange={handleBeforeViewStateChange}
+                    onSubmitStart={handleSubmitStart}
                     onSubmitHalt={handleSubmitHalt}
                 >
                     {(onSubmit) => {

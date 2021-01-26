@@ -40,6 +40,7 @@ interface Props {
 }
 
 export function _TextField(props: Props) {
+    console.log("__render TextField");
     const {
         name,
         isDisabled,

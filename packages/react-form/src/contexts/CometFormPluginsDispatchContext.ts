@@ -9,4 +9,4 @@ import * as React from 'react';
 
 import emptyFunction from '../utils/emptyFunction';
 
-export const CometFormPluginsDispatchContext = React.createContext(emptyFunction);
+export const CometFormPluginsDispatchContext = React.createContext<any>(emptyFunction);

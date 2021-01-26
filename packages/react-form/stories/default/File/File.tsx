@@ -23,6 +23,7 @@ interface Props {
 }
 
 export const _File = (props: Props) => {
+    console.log("__render _File");
     const {
         file,
         isDisabled,

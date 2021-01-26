@@ -11,6 +11,7 @@ import {
     useFormViewStateDispatcher,
     useFormViewStateReducer,
     withFormViewStatePart,
+    useFormValidationErrors,
 } from '../../../';
 
 import {FormField} from '../../components';
@@ -24,10 +25,14 @@ interface Props {
 }
 
 export const _TextArea = (props: Props) => {
+    console.log("__render _TextArea");
     const {
         description,
         isDisabled,
     } = props;
+
+    // TODO: test re-render
+    const errors = useFormValidationErrors();
 
     useFormViewStateReducer(textareaReducer, textareaStateChecker);
     const d = useFormViewStateDispatcher<DefaultFormData>();

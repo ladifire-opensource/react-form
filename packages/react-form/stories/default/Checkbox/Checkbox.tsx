@@ -26,6 +26,7 @@ interface Props {
 }
 
 export const _Checkbox = (props: Props) => {
+    console.log("__render _Checkbox");
     const {
         secure,
         isDisabled,
