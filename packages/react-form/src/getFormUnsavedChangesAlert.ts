@@ -7,7 +7,7 @@
 
 import fbt from 'fbt';
 
-export function getComposerUnsavedChangesAlert(a) {
+export function getFormUnsavedChangesAlert(a) {
     if (Boolean(a)) return {
         primaryButtonLabel: fbt._("R\u1eddi kh\u1ecfi"),
         secondaryButtonLabel: fbt._("Ti\u1ebfp t\u1ee5c ch\u1ec9nh s\u1eeda"),

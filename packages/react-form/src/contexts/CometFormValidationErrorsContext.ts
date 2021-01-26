@@ -7,6 +7,4 @@
 
 import * as React from 'react';
 
-export const CometComposerViewStateReducersContext = React.createContext({
-    current: new Map()
-});
+export const CometFormValidationErrorsContext = React.createContext({});

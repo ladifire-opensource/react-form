@@ -7,6 +7,7 @@
 
 import * as React from 'react';
 
-export const CometComposerFormRefContext = React.createContext({
-    current: null
+export const CometFormPluginsContext = React.createContext({
+    decorators: new Map(),
+    handlers: new Map()
 });

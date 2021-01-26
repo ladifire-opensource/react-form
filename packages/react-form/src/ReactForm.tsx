@@ -8,25 +8,25 @@
 import * as React from 'react';
 
 import {
-    CometComposerFormRefContext,
-    CometComposerIneligibilityContext,
-    CometComposerLoggerDispatcherContext,
-    CometComposerPluginsContext,
-    CometComposerPluginsDispatchContext,
-    CometComposerPreSubmitHooksContext,
-    CometComposerViewStateAlteredContext,
-    CometComposerValidationErrorsContext,
-    CometComposerViewStateContext,
-    CometComposerViewStateDispatcherContext,
-    CometComposerViewStateReducersContext,
+    CometFormRefContext,
+    CometFormIneligibilityContext,
+    CometFormLoggerDispatcherContext,
+    CometFormPluginsContext,
+    CometFormPluginsDispatchContext,
+    CometFormPreSubmitHooksContext,
+    CometFormViewStateAlteredContext,
+    CometFormValidationErrorsContext,
+    CometFormViewStateContext,
+    CometFormViewStateDispatcherContext,
+    CometFormViewStateReducersContext,
 } from './contexts';
 import {shallowEqual} from './utils/shallowEqual';
-import {createEmptyCometComposerViewState} from './utils/createEmptyCometComposerViewState';
-import {cometComposerPluginsReducers} from './cometComposerPluginsReducers';
-import {getComposerPluginEligibility} from './getComposerPluginEligibility';
-import {getComposerUnsavedChangesAlert} from './getComposerUnsavedChangesAlert';
-import {getComposerValidationErrors} from './getComposerValidationErrors';
-import {reduceComposerViewState} from './reduceComposerViewState';
+import {createEmptyCometFormViewState} from './utils/createEmptyCometFormViewState';
+import {cometFormPluginsReducers} from './cometFormPluginsReducers';
+import {getFormPluginEligibility} from './getFormPluginEligibility';
+import {getFormUnsavedChangesAlert} from './getFormUnsavedChangesAlert';
+import {getFormValidationErrors} from './getFormValidationErrors';
+import {reduceFormViewState} from './reduceFormViewState';
 import {
     Validators,
     BaseFormState,
@@ -66,11 +66,11 @@ function a<T extends object>(a: Props<T>, c) {
         w = React.useRef(null);
     a = React.useRef(null);
     d = React.useReducer(function(a, c) {
-        c = reduceComposerViewState(r, s, a, p, c);
+        c = reduceFormViewState(r, s, a, p, c);
         w.current = c;
         i && i(c, a);
         return c
-    }, d, createEmptyCometComposerViewState);
+    }, d, createEmptyCometFormViewState);
     var x = d[0];
 
     console.log("___x", x);
@@ -78,7 +78,7 @@ function a<T extends object>(a: Props<T>, c) {
     d = d[1];
     var y = function() {
         if (!Boolean(x == null ? void 0 : x.ignoreDirtyFlag))
-            return getComposerUnsavedChangesAlert(x == null ? void 0 : x.isDirty)
+            return getFormUnsavedChangesAlert(x == null ? void 0 : x.isDirty)
     };
     React.useImperativeHandle(c, function() {
         return {
@@ -87,18 +87,18 @@ function a<T extends object>(a: Props<T>, c) {
             }
         }
     }, [x]);
-    c = React.useReducer(cometComposerPluginsReducers, {
+    c = React.useReducer(cometFormPluginsReducers, {
         decorators: new Map(),
         handlers: new Map()
     });
     var z = c[0];
     c = c[1];
     var A = React.useMemo(function() {
-        return q != null ? getComposerValidationErrors(q, x) : {}
+        return q != null ? getFormValidationErrors(q, x) : {}
     }, [q, x]);
     shallowEqual(t.current, A) || (t.current = A);
     A = React.useMemo(function() {
-        return f != null ? getComposerPluginEligibility(f, x) : new Set()
+        return f != null ? getFormPluginEligibility(f, x) : new Set()
     }, [f, x]);
     u.current.size === A.size && Array.from(A).every(function(a) {
         return u.current.has(a)
@@ -143,27 +143,27 @@ function a<T extends object>(a: Props<T>, c) {
         }
     }, [C, o, h]);
 
-    return React.createElement(CometComposerPluginsDispatchContext.Provider, {
+    return React.createElement(CometFormPluginsDispatchContext.Provider, {
         value: c,
-        children: React.createElement(CometComposerPluginsContext.Provider, {
+        children: React.createElement(CometFormPluginsContext.Provider, {
             value: z,
-            children: React.createElement(CometComposerViewStateReducersContext.Provider, {
+            children: React.createElement(CometFormViewStateReducersContext.Provider, {
                 value: r,
-                children: React.createElement(CometComposerViewStateAlteredContext.Provider, {
+                children: React.createElement(CometFormViewStateAlteredContext.Provider, {
                     value: s,
-                    children: React.createElement(CometComposerViewStateContext.Provider, {
+                    children: React.createElement(CometFormViewStateContext.Provider, {
                         value: x,
-                        children: React.createElement(CometComposerViewStateDispatcherContext.Provider, {
+                        children: React.createElement(CometFormViewStateDispatcherContext.Provider, {
                             value: d,
-                            children: React.createElement(CometComposerValidationErrorsContext.Provider, {
+                            children: React.createElement(CometFormValidationErrorsContext.Provider, {
                                 value: t.current,
-                                children: React.createElement(CometComposerIneligibilityContext.Provider, {
+                                children: React.createElement(CometFormIneligibilityContext.Provider, {
                                     value: u.current,
-                                    children: React.createElement(CometComposerLoggerDispatcherContext.Provider, {
+                                    children: React.createElement(CometFormLoggerDispatcherContext.Provider, {
                                         value: A,
-                                        children: React.createElement(CometComposerPreSubmitHooksContext.Provider, {
+                                        children: React.createElement(CometFormPreSubmitHooksContext.Provider, {
                                             value: v,
-                                            children: React.createElement(CometComposerFormRefContext.Provider, {
+                                            children: React.createElement(CometFormRefContext.Provider, {
                                                 value: a,
                                                 children: [React.createElement("form", {
                                                     "data-testid": void 0,

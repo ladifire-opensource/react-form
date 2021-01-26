@@ -6,16 +6,16 @@
  */
 
 export * from './ReactForm';
-export * from './cometComposerPluginsReducers';
-export * from './getComposerPluginEligibility';
-export * from './getComposerUnsavedChangesAlert';
-export * from './getComposerValidationErrors';
-export * from './reduceComposerViewState';
-export * from './reduceComposerViewStateToCreationData';
-export * from './useComposerViewStateDispatcher';
-export * from './useComposerViewStateReducer';
-export * from './withComposerViewStatePart';
-export * from './useComposerValidationErrors';
-export * from './useCometComposerDecorator';
+export * from './cometFormPluginsReducers';
+export * from './getFormPluginEligibility';
+export * from './getFormUnsavedChangesAlert';
+export * from './getFormValidationErrors';
+export * from './reduceFormViewState';
+export * from './reduceFormViewStateToCreationData';
+export * from './useFormViewStateDispatcher';
+export * from './useFormViewStateReducer';
+export * from './withFormViewStatePart';
+export * from './useFormValidationErrors';
+export * from './useCometFormDecorator';
 export * from './contexts';
 export * from './types';

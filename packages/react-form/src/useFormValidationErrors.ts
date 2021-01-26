@@ -7,6 +7,8 @@
 
 import * as React from 'react';
 
-import emptyFunction from '../utils/emptyFunction';
+import {CometFormValidationErrorsContext} from './contexts';
 
-export const CometComposerLoggerDispatcherContext = React.createContext(emptyFunction);
+export function useFormValidationErrors() {
+    return React.useContext(CometFormValidationErrorsContext)
+}

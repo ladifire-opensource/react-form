@@ -7,10 +7,10 @@
 
 import * as React from 'react';
 
-import {CometComposerPluginsDispatchContext} from './contexts';
+import {CometFormPluginsDispatchContext} from './contexts';
 
-export function useCometComposerDecorator(a) {
-    var c = React.useContext(CometComposerPluginsDispatchContext);
+export function useCometFormDecorator(a) {
+    var c = React.useContext(CometFormPluginsDispatchContext);
     React.useEffect(function() {
         c({
             decorator: a,

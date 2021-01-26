@@ -7,8 +7,8 @@
 
 import {withSomeContext} from './utils/withSomeContext';
 
-import {CometComposerViewStateContext} from './contexts';
+import {CometFormViewStateContext} from './contexts';
 
-export function withComposerViewStatePart(a, c) {
-    return withSomeContext(a, CometComposerViewStateContext, c)
+export function withFormViewStatePart(a, c) {
+    return withSomeContext(a, CometFormViewStateContext, c)
 }

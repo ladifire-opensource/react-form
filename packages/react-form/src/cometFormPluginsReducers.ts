@@ -48,4 +48,4 @@ function a(a, b) {
     return a
 }
 
-export {a as cometComposerPluginsReducers}
+export {a as cometFormPluginsReducers}

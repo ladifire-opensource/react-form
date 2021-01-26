@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 
-import {ReactForm} from '../../src';
+import {ReactForm} from '../../';
 import {TextField} from './TextField';
 import {SubmitButton} from './SubmitButton';
 import {

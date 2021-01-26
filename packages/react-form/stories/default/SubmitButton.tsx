@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 
-import {withComposerViewStatePart} from '../../src';
+import {withFormViewStatePart} from '../../';
 
 interface Props {
     isDirty?: boolean;
@@ -23,7 +23,7 @@ const _SubmitButton = (props: Props) => {
     );
 };
 
-const WithViewStatePart = withComposerViewStatePart(_SubmitButton, (state) => {
+const WithViewStatePart = withFormViewStatePart(_SubmitButton, (state) => {
     return {
         isDirty: state.isDirty,
     };

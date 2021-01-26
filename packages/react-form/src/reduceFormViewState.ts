@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function reduceComposerViewState(a, b, c, d, e) {
+export function reduceFormViewState(a, b, c, d, e) {
     var f = c;
     c = a.current.keys();
     for (var a = c, c = Array.isArray(a), g = 0, a = c ? a : a[typeof Symbol === "function" ? Symbol.iterator : "@@iterator"]();;) {

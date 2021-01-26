@@ -1,5 +1,5 @@
 {
-  "name": "@ladifire-opensource/react-form",
+  "name": "react-form",
   "version": "0.0.1-beta.1",
   "description": "React form wrapper",
   "license": "MIT",
@@ -16,6 +16,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ladifire-opensource/react-form"
+    "url": "https://github.com/ladifire-opensource/form-x"
   }
 }

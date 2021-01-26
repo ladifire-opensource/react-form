@@ -7,8 +7,4 @@
 
 import * as React from 'react';
 
-import {CometComposerValidationErrorsContext} from './contexts';
-
-export function useComposerValidationErrors() {
-    return React.useContext(CometComposerValidationErrorsContext)
-}
+export const CometFormIneligibilityContext = React.createContext(new Set());

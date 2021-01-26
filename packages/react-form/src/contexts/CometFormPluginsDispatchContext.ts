@@ -7,4 +7,6 @@
 
 import * as React from 'react';
 
-export const CometComposerValidationErrorsContext = React.createContext({});
+import emptyFunction from '../utils/emptyFunction';
+
+export const CometFormPluginsDispatchContext = React.createContext(emptyFunction);

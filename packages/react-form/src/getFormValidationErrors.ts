@@ -5,8 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
-
-export const CometComposerPreSubmitHooksContext = React.createContext({
-    current: new Map()
-});
+export function getFormValidationErrors(a, b) {
+    var c = {};
+    for (var d in a) {
+        var e = a[d];
+        e = e(b);
+        e != null && (c[d] = e)
+    }
+    return c
+}

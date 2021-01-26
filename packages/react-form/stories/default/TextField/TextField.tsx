@@ -10,10 +10,10 @@ import * as React from 'react';
 import stylex from '@ladifire-opensource/stylex';
 
 import {
-    useComposerViewStateDispatcher,
-    useComposerViewStateReducer,
-    withComposerViewStatePart,
-} from '../../../src';
+    useFormViewStateDispatcher,
+    useFormViewStateReducer,
+    withFormViewStatePart,
+} from '../../../';
 import {textFieldReducer} from './textFieldReducer';
 import {textFieldStateChecker} from './textFieldStateChecker';
 import {DefaultExampleFormState} from '../types';
@@ -36,8 +36,8 @@ export function _TextField(a: Props) {
     var c = a.name;
     a = a.isDisabled;
     a = a === void 0 ? !1 : a;
-    useComposerViewStateReducer(textFieldReducer, textFieldStateChecker);
-    const d = useComposerViewStateDispatcher();
+    useFormViewStateReducer(textFieldReducer, textFieldStateChecker);
+    const d = useFormViewStateDispatcher();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
             const payload = {
                 name: event.target.value,
@@ -61,7 +61,7 @@ export function _TextField(a: Props) {
     );
 }
 
-let c = withComposerViewStatePart(_TextField, function(state: DefaultExampleFormState) {
+let c = withFormViewStatePart(_TextField, function(state: DefaultExampleFormState) {
     return {
         name: state.data ? state.data.name : '',
     }

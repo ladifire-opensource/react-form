@@ -7,6 +7,6 @@
 
 import * as React from 'react';
 
-import {createEmptyCometComposerViewState} from '../utils/createEmptyCometComposerViewState';
+import emptyFunction from '../utils/emptyFunction';
 
-export const CometComposerViewStateContext = React.createContext(createEmptyCometComposerViewState());
+export const CometFormLoggerDispatcherContext = React.createContext(emptyFunction);

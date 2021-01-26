@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function reduceComposerViewStateToCreationData(a, b, c, d) {
+export function reduceFormViewStateToCreationData(a, b, c, d) {
     function e(c, f) {
         var g = b[f];
         if (g != null) {

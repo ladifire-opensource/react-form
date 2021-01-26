@@ -7,4 +7,6 @@
 
 import * as React from 'react';
 
-export const CometComposerIneligibilityContext = React.createContext(new Set());
+import {createEmptyCometFormViewState} from '../utils/createEmptyCometFormViewState';
+
+export const CometFormViewStateContext = React.createContext(createEmptyCometFormViewState());

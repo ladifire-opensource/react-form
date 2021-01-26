@@ -7,6 +7,8 @@
 
 import * as React from 'react';
 
-import emptyFunction from '../utils/emptyFunction';
+import {CometFormViewStateDispatcherContext} from './contexts/CometFormViewStateDispatcherContext';
 
-export const CometComposerViewStateDispatcherContext = React.createContext(emptyFunction);
+export function useFormViewStateDispatcher() {
+    return React.useContext(CometFormViewStateDispatcherContext)
+}

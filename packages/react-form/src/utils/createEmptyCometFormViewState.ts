@@ -7,7 +7,7 @@
 
 import {uuid} from './uuid';
 
-export function createEmptyCometComposerViewState(a?: any) {
+export function createEmptyCometFormViewState(a?: any) {
     return a != null ? a : {
         audience: {},
         creationSessionID: uuid(),
