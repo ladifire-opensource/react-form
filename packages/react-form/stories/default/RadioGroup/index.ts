@@ -5,8 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
-
-import emptyFunction from '../utils/emptyFunction';
-
-export const CometFormViewStateDispatcherContext = React.createContext<any>(emptyFunction);
+export * from './RadioGroup';

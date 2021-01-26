@@ -16,7 +16,7 @@ import {
 } from '../../../';
 import {textFieldReducer} from './textFieldReducer';
 import {textFieldStateChecker} from './textFieldStateChecker';
-import {DefaultExampleFormState} from '../types';
+import {DefaultExampleFormState, DefaultFormData} from '../types';
 
 const styles = stylex.create({
     root: {
@@ -37,7 +37,7 @@ export function _TextField(a: Props) {
     a = a.isDisabled;
     a = a === void 0 ? !1 : a;
     useFormViewStateReducer(textFieldReducer, textFieldStateChecker);
-    const d = useFormViewStateDispatcher();
+    const d = useFormViewStateDispatcher<DefaultFormData>();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
             const payload = {
                 name: event.target.value,

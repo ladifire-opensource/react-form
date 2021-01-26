@@ -9,6 +9,9 @@ import * as React from 'react';
 
 import {ReactForm} from '../../';
 import {TextField} from './TextField';
+import {Checkbox} from './Checkbox';
+import {RadioGroup} from './RadioGroup';
+import {Select} from './Select';
 import {SubmitButton} from './SubmitButton';
 import {
     DefaultExampleFormState,
@@ -30,7 +33,8 @@ export function DefaultForm(props: Props) {
         return {
             data: {
                 name: '123',
-                id: '',
+                checked: false,
+                radio: 'OPTION1'
             },
         } as DefaultExampleFormState;
     }, []);
@@ -75,6 +79,9 @@ export function DefaultForm(props: Props) {
                 return (
                     <div>
                         <TextField/>
+                        <Checkbox/>
+                        <RadioGroup/>
+                        <Select/>
                         <SubmitButton onClick={onSubmit}/>
                     </div>
                 )

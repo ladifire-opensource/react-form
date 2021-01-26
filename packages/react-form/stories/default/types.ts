@@ -8,8 +8,10 @@
 import {BaseFormState} from '../../src';
 
 export interface DefaultFormData {
-    id: string;
     name: string;
+    checked?: boolean;
+    radio: string;
+    select: string;
 }
 
 export interface DefaultExampleFormState extends BaseFormState<DefaultFormData> {};

@@ -15,9 +15,8 @@ import {
     withFormViewStatePart,
 } from '../../../';
 
-import {checkboxReducer} from './checkboxReducer';
-import {checkboxStateChecker} from './checkboxStateChecker';
-import {DefaultExampleFormState} from '../types';
+import {radioGroupReducer} from './radioGroupReducer';
+import {DefaultExampleFormState, DefaultFormData} from '../types';
 
 const styles = stylex.create({
     root: {
@@ -29,22 +28,22 @@ const styles = stylex.create({
 });
 
 interface Props {
-    checked?: boolean;
+    radio?: string;
     isDisabled?: boolean;
 }
 
-export const _Checkbox = (props: Props) => {
+export const _RadioGroup = (props: Props) => {
     const {
-        checked,
+        radio,
         isDisabled,
     } = props;
 
-    useFormViewStateReducer(checkboxReducer, checkboxStateChecker);
-    const formDispatch = useFormViewStateDispatcher();
+    useFormViewStateReducer(radioGroupReducer);
+    const formDispatch = useFormViewStateDispatcher<DefaultFormData>();
     const handleChange = React.useCallback(function(event: React.ChangeEvent<HTMLInputElement>) {
         const payload = {
-            checked: event.target.checked,
-            type: "update_checked"
+            radio: event.target.value,
+            type: "update_radio"
         };
         formDispatch(payload)
     }, [formDispatch]);
@@ -52,17 +51,21 @@ export const _Checkbox = (props: Props) => {
     return (
         <div>
             <label>
-                <input type="checkbox" checked={checked} onChange={handleChange}/>
-                Something else
+                <input type="radio" value="OPTION1" checked={radio === "OPTION1"} onChange={handleChange}/>
+                Option 1
+            </label>
+            <label>
+                <input type="radio" value="OPTION2" checked={radio === "OPTION2"} onChange={handleChange}/>
+                Option 2
             </label>
         </div>
     );
 };
 
-let c = withFormViewStatePart(_Checkbox, function(state: DefaultExampleFormState) {
+let c = withFormViewStatePart(_RadioGroup, function(state: DefaultExampleFormState) {
     return {
-        checked: state.data ? state.data.checked : false,
+        radio: state.data ? state.data.radio : false,
     }
 });
 
-export {c as Checkbox}
+export {c as RadioGroup}
